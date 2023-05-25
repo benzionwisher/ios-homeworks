@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
             profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         ])
-        profileHeaderView.frame = view.frame
+//        profileHeaderView.frame = view.frame
     }
 }
 

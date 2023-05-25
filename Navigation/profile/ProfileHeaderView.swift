@@ -16,6 +16,7 @@ class ProfileHeaderView: UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "My Dog"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -30,6 +31,8 @@ class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.addTarget(self, action: #selector(btnTap), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
         
         return button
     }()
@@ -41,6 +44,8 @@ class ProfileHeaderView: UIView {
         imageView.image = UIImage(named: "dog")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
         return imageView
     }()
     
@@ -50,6 +55,8 @@ class ProfileHeaderView: UIView {
         label.textColor = .gray
         label.text = "Статус"
         label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+
         return label
     }()
     
@@ -61,31 +68,73 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 12
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1.0
-        textField.placeholder = ""
+        textField.placeholder = "Статус"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+
         return textField
     }()
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        subview()
+        
+//        addSubview(imageView)
+//        addSubview(titleName)
+//        addSubview(titleStatus)
+//        addSubview(button)
+//        addSubview(textField)
+        
+        constrains()
+
+        
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private var statusText: String = ""
     
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//
+//        titleName.translatesAutoresizingMaskIntoConstraints = false
+//
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        titleStatus.translatesAutoresizingMaskIntoConstraints = false
+//
+//        textField.translatesAutoresizingMaskIntoConstraints = false
+        
 
-        titleName.translatesAutoresizingMaskIntoConstraints = false
         
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-     
-        titleStatus.translatesAutoresizingMaskIntoConstraints = false
-      
-        textField.translatesAutoresizingMaskIntoConstraints = false
+
+    }
+    
+    @objc func btnTap() {
         
+        print( textField.text ?? "Напишите статус")
+        
+    }
+    
+    
+    func subview() {
         addSubview(imageView)
         addSubview(titleName)
         addSubview(titleStatus)
         addSubview(button)
         addSubview(textField)
-        
+    }
+    
+
+    
+    
+    func constrains() {
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 15),
             button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -108,12 +157,6 @@ class ProfileHeaderView: UIView {
             textField.leadingAnchor.constraint(equalTo: titleName.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
         ])
-    }
-    
-    @objc func btnTap() {
-        
-        print( textField.text ?? "Напишите статус")
-        
     }
 
 
