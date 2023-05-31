@@ -19,6 +19,7 @@
 		9963EFED2A177652003B84E5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9963EFEC2A177652003B84E5 /* PostViewController.swift */; };
 		9963EFEF2A177676003B84E5 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9963EFEE2A177676003B84E5 /* Post.swift */; };
 		9963EFF12A1776F7003B84E5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9963EFF02A1776F7003B84E5 /* InfoViewController.swift */; };
+		99C3A5BA2A27909C004B590D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C3A5B92A27909C004B590D /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		9963EFEC2A177652003B84E5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		9963EFEE2A177676003B84E5 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9963EFF02A1776F7003B84E5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		99C3A5B92A27909C004B590D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				9963EFF02A1776F7003B84E5 /* InfoViewController.swift */,
 				9963EFEE2A177676003B84E5 /* Post.swift */,
 				9963EFEC2A177652003B84E5 /* PostViewController.swift */,
+				99C3A5B92A27909C004B590D /* LogInViewController.swift */,
 				9901667C2A157B7D004B2AAA /* AppDelegate.swift */,
 				9901667E2A157B7D004B2AAA /* SceneDelegate.swift */,
 				9963EFEA2A17756A003B84E5 /* FeedViewController.swift */,
@@ -172,6 +175,7 @@
 				9963EFE92A177560003B84E5 /* ProfileViewController.swift in Sources */,
 				9963EFEF2A177676003B84E5 /* Post.swift in Sources */,
 				9963EFF12A1776F7003B84E5 /* InfoViewController.swift in Sources */,
+				99C3A5BA2A27909C004B590D /* LogInViewController.swift in Sources */,
 				9901667F2A157B7D004B2AAA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
