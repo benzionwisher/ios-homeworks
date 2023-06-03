@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let profileViewcontroller = ProfileViewController()
+        let profileViewcontroller = LogInViewController()
         let profileNovigationViewController = UINavigationController(rootViewController: profileViewcontroller)
         profileNovigationViewController.tabBarItem.title = "Профиль"
         profileNovigationViewController.tabBarItem.image = UIImage(systemName: "person.crop.circle.fill")

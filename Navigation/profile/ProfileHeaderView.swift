@@ -24,13 +24,14 @@ class ProfileHeaderView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("Статус", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor(named: "ColorBlue")
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.addTarget(self, action: #selector(btnTap), for: .touchUpInside)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
 
         
@@ -77,19 +78,8 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         subview()
-        
-//        addSubview(imageView)
-//        addSubview(titleName)
-//        addSubview(titleStatus)
-//        addSubview(button)
-//        addSubview(textField)
-        
         constrains()
-
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -97,31 +87,15 @@ class ProfileHeaderView: UIView {
     }
     
     private var statusText: String = ""
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//
-//        titleName.translatesAutoresizingMaskIntoConstraints = false
-//
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        titleStatus.translatesAutoresizingMaskIntoConstraints = false
-//
-//        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-
-        
-
     }
     
     @objc func btnTap() {
-        
         print( textField.text ?? "Напишите статус")
         
     }
-    
     
     func subview() {
         addSubview(imageView)
@@ -130,10 +104,7 @@ class ProfileHeaderView: UIView {
         addSubview(button)
         addSubview(textField)
     }
-    
 
-    
-    
     func constrains() {
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 15),
@@ -158,6 +129,4 @@ class ProfileHeaderView: UIView {
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
         ])
     }
-
-
 }

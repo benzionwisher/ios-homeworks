@@ -21,6 +21,10 @@ class ProfileViewController: UIViewController {
         addLayout()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+    }
+    
+    
     func subview() {
         view.addSubview(profileHeaderView)
         view.addSubview(pushButton)
@@ -43,7 +47,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("кнопка", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor(named: "ColorBlue")
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
