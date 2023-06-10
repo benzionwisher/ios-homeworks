@@ -19,7 +19,6 @@ class FeedViewController: UIViewController {
         return button
     }()
     
-    let postName: Post = .init(title: "Пост1")
     
     func setConstraints() {
         NSLayoutConstraint.activate([
@@ -32,7 +31,6 @@ class FeedViewController: UIViewController {
     
     @objc func showPage () {
         let postViewController = PostViewController()
-        postViewController.postName = postName.title
         navigationController?.pushViewController(postViewController, animated: true)
     }
     

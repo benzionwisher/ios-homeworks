@@ -8,10 +8,6 @@
 import UIKit
 class ProfileHeaderView: UIView {
     
-    
-
-    
-    
     private let titleName: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -70,6 +66,7 @@ class ProfileHeaderView: UIView {
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1.0
         textField.placeholder = "Статус"
+        textField.textAlignment = .center
         textField.translatesAutoresizingMaskIntoConstraints = false
 
         return textField
@@ -111,7 +108,7 @@ class ProfileHeaderView: UIView {
             button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             button.heightAnchor.constraint(equalToConstant: 50),
-            button.bottomAnchor.constraint(equalTo: bottomAnchor),
+            button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             imageView.widthAnchor.constraint(equalToConstant: 120),
