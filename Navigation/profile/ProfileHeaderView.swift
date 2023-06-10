@@ -71,7 +71,8 @@ class ProfileHeaderView: UIView {
 
         return textField
     }()
-    
+    private var statusLabel: String = ""
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,7 +92,14 @@ class ProfileHeaderView: UIView {
     
     @objc func btnTap() {
         print( textField.text ?? "Напишите статус")
-        
+        titleStatus.text = textField.text
+ 
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        if let titleStatus = textField.text {
+            statusLabel = titleStatus
+        }
     }
     
     func subview() {
