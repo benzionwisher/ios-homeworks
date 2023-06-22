@@ -10,11 +10,14 @@ import UIKit
 class ProfileViewController: UIViewController, UITableViewDelegate {
     
     private let post = Post.createPost()
+    private let postFeed = Post.createPost()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.register(PhotosSlideController.self, forCellReuseIdentifier: PhotosSlideController.identifier)
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,35 +30,71 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         view.backgroundColor = .white
         addSubviews()
         setupContraints()
-        navigationController?.navigationBar.isHidden = true
     }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    
+    }
+    
     
     private func addSubviews(){
         view.addSubview(tableView)
     }
+    
+    func pushPhotosViewController() {
+        let photosVC = PhotosViewController()
+        photosVC.parentNavigationControler = self.navigationController
+        navigationController?.pushViewController(photosVC, animated: true)
+        
+    }
+    
 }
 
+
 extension ProfileViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        post.count
+        if section == 0   {
+            return 1
+        }
+        else {
+            return  postFeed.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        cell.setupCell(model: post[indexPath.row])
-        return cell
+            if indexPath.section == 0  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotosSlideController.identifier, for: indexPath) as! PhotosSlideController
+                cell.callBack = pushPhotosViewController
+            return cell
+        } else  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+            cell.setupCell(model: postFeed[indexPath.row])
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    
         if section == 0 {
-            let header = ProfileHeaderView()
-            return header
+            return ProfileHeaderView()
         } else {
             return nil
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 150
+        }
+        return tableView.rowHeight
+    }
 }
+
+
+
 
 extension UIView {
     static var identifier: String {
