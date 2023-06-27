@@ -7,13 +7,26 @@
 
 import UIKit
 
-final class PhotosCollectionViewCell: UICollectionViewCell {
-    
 
-    private let postImageView: UIImageView = {
+protocol CustomCellDelegate: AnyObject {
+    func tapImageInCell(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath)
+}
+
+
+ class PhotosCollectionViewCell: UICollectionViewCell {
+    
+    weak var delegate: CustomCellDelegate?
+    private var indexPathCell = IndexPath()
+
+
+    private lazy var postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapImage)))
+
         return imageView
     }()
     
@@ -39,6 +52,10 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     private func addSubviews(){
         contentView.addSubview(postImageView)
     }
+     
+     func setIndexPath(_ indexPath: IndexPath) {
+         indexPathCell = indexPath
+     }
         
     private func setupContraints() {
         
@@ -49,4 +66,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
+     
+     @objc private func tapImage() {
+         delegate?.tapImageInCell(postImageView.image, frameImage: postImageView.frame, indexPath: indexPathCell)
+     }
 }

@@ -88,6 +88,18 @@ return scrollView
         
         return textField
     }()
+    
+    private var warningLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        label.textColor = .red
+        label.text = "Password is too short!"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        
+        return label
+    }()
+    
 
     private lazy var  loginButton: UIButton = {
         let button = UIButton(type: .system)
@@ -106,6 +118,11 @@ return scrollView
 
         return button
     }()
+    
+    private let countPassword = 6
+    private let correctUserName = "admin"
+    private let correctPassword = "qwerty123"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,8 +145,37 @@ return scrollView
     }
         
     @objc private func pushLogin() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
-    }
+            
+            if loginTextField.text?.isEmpty == true {
+                loginTextField.shake()
+                return
+            }
+            
+            if passwordTextField.text?.isEmpty == true {
+               passwordTextField.shake()
+                return
+            }
+            
+            if let password = passwordTextField.text, password.count < countPassword {
+                warningLabel.text = "Пароль должен быть более 5 символов"
+                warningLabel.isHidden = false
+                return
+            }
+         
+            if loginTextField.text != correctUserName || passwordTextField.text != correctPassword {
+                let alert = UIAlertController(title: "Ошибка", message: "Неправильный логин или пароль", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            let profileViewController = ProfileViewController()
+            navigationController?.pushViewController(profileViewController, animated: true)
+        warningLabel.isHidden = true
+        }
+    
+    
+    
     
     @objc private func keyboardShow(notification: NSNotification) {
         if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -155,6 +201,8 @@ return scrollView
         stackText.addArrangedSubview(sepor)
         stackText.addArrangedSubview(passwordTextField)
         contentPageView.addSubview(loginButton)
+        scrollView.addSubview(warningLabel)
+
     }
     
     private func setConstraints() {
@@ -193,11 +241,28 @@ return scrollView
             passwordTextField.centerXAnchor.constraint(equalTo: contentPageView.centerXAnchor),
             passwordTextField.widthAnchor.constraint(equalToConstant:  widthInset),
             
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
+            warningLabel.topAnchor.constraint(equalTo: stackText.bottomAnchor, constant: 30),
+            warningLabel.leadingAnchor.constraint(equalTo: stackText.leadingAnchor),
+            
+            
+            loginButton.topAnchor.constraint(equalTo: warningLabel.bottomAnchor, constant: 16),
             loginButton.centerXAnchor.constraint(equalTo: contentPageView.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.widthAnchor.constraint(equalToConstant:  widthInset),
             loginButton.bottomAnchor.constraint(equalTo: contentPageView.bottomAnchor),
         ])
+    }
+}
+
+extension UIView {
+    func shake(count : Float = 4,for duration : TimeInterval = 0.3,withTranslation translation : Float = 5) {
+
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.repeatCount = count
+        animation.duration = duration/TimeInterval(animation.repeatCount)
+        animation.autoreverses = true
+        animation.values = [translation, -translation]
+        layer.add(animation, forKey: "shake")
     }
 }

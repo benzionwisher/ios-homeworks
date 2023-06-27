@@ -9,8 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate {
     
-    private let post = Post.createPost()
-    private let postFeed = Post.createPost()
+    private var postFeed = Post.createPost()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -73,6 +72,23 @@ extension ProfileViewController: UITableViewDataSource {
         } else  {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
             cell.setupCell(model: postFeed[indexPath.row])
+            
+            cell.plusView = {
+                let modalDetailVC = ModalDetailVC()
+                self.postFeed[indexPath.row].views += 1
+                self.tableView.reloadData()
+                modalDetailVC.detailPost = self.postFeed[indexPath.row]
+                modalDetailVC.parentNavigationControler = self.navigationController
+                self.navigationController?.present(modalDetailVC, animated: true)
+            }
+            
+            
+            cell.plusLike = {
+                    self.postFeed[indexPath.row].likes += 1
+                    self.tableView.reloadData()
+//                }
+            }
+            
             return cell
         }
     }
@@ -91,6 +107,8 @@ extension ProfileViewController: UITableViewDataSource {
         }
         return tableView.rowHeight
     }
+    
+
 }
 
 

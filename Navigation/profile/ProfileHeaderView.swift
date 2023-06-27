@@ -119,10 +119,16 @@ class ProfileHeaderView: UIView {
     }
     
     @objc func btnTap() {
-        print( textField.text ?? "Напишите статус")
-        titleStatus.text = textField.text
- 
+
+        if textField.text?.isEmpty == true {
+            textField.shake()
+        } else {
+            titleStatus.text = textField.text
+            print( textField.text ?? "Напишите статус")
+        }
+
     }
+
     
     @objc func statusTextChanged(_ textField: UITextField) {
         if let titleStatus = textField.text {
@@ -213,3 +219,4 @@ class ProfileHeaderView: UIView {
         }
     }
 }
+

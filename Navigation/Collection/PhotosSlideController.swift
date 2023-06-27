@@ -43,14 +43,14 @@ class PhotosSlideController: UITableViewCell {
         collectionView.register(PhotosSlideCollectionViewCell.self, forCellWithReuseIdentifier: PhotosSlideCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.backgroundColor = .white
-        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapAction)))
+        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapImage)))
         
         return collectionView
     }()
     var callBack: (() -> Void)? = nil
 
     
-    @objc func tapAction() {
+    @objc func tapImage() {
         if let action = self.callBack { action() }
     }
     
