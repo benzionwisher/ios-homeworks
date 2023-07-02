@@ -26,6 +26,7 @@
 		9973D75D2A3517190049ECC1 /* PhotosSlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973D75C2A3517190049ECC1 /* PhotosSlideCollectionViewCell.swift */; };
 		99A5559B2A2B41E1007D188D /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A5559A2A2B41E1007D188D /* PostTableViewCell.swift */; };
 		99C3A5BA2A27909C004B590D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C3A5B92A27909C004B590D /* LogInViewController.swift */; };
+		99CFD2362A4A5EA5009B633A /* ModalDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CFD2352A4A5EA5009B633A /* ModalDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		9973D75C2A3517190049ECC1 /* PhotosSlideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlideCollectionViewCell.swift; sourceTree = "<group>"; };
 		99A5559A2A2B41E1007D188D /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		99C3A5B92A27909C004B590D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		99CFD2352A4A5EA5009B633A /* ModalDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				9973D7562A3514BF0049ECC1 /* PostImages.swift */,
 				9973D7542A35135F0049ECC1 /* PhotosSlideController.swift */,
 				9973D75C2A3517190049ECC1 /* PhotosSlideCollectionViewCell.swift */,
+				99CFD2352A4A5EA5009B633A /* ModalDetailVC.swift */,
 				9973D75A2A3516D40049ECC1 /* PhotosCollectionViewCell.swift */,
 			);
 			path = Collection;
@@ -195,6 +198,7 @@
 			files = (
 				9973D7552A35135F0049ECC1 /* PhotosSlideController.swift in Sources */,
 				9973D7572A3514BF0049ECC1 /* PostImages.swift in Sources */,
+				99CFD2362A4A5EA5009B633A /* ModalDetailVC.swift in Sources */,
 				99A5559B2A2B41E1007D188D /* PostTableViewCell.swift in Sources */,
 				9963EFED2A177652003B84E5 /* PostViewController.swift in Sources */,
 				990166812A157B7D004B2AAA /* ViewController.swift in Sources */,

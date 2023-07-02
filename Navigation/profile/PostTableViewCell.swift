@@ -9,7 +9,9 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    
+    var plusLike: (() -> Void)? = nil
+    var plusView: (() -> Void)? = nil
+
     private let authorName: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 26)
@@ -26,11 +28,15 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let likes: UILabel = {
+    private lazy var likes: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
+
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pushLike)))
+
         return label
         
     }()
@@ -50,10 +56,14 @@ class PostTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let postImage: UIImageView = {
+    private lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onePost)))
+
+        
         
         return imageView
     }()
@@ -68,6 +78,14 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    @objc func pushLike() {
+        if let action = self.plusLike { action() }
+    }
+    
+    @objc func onePost() {
+        if let action = self.plusView { action() }
+    }
     
     func setupCell(model: Post) {
         
