@@ -33,14 +33,17 @@ class ProfileHeaderView: UIView {
         
         return button
     }()
-    private let imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openBigAvatar)))
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 3
         imageView.layer.cornerRadius = 60
         imageView.image = UIImage(named: "dog")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         return imageView
@@ -73,6 +76,31 @@ class ProfileHeaderView: UIView {
     }()
     private var statusLabel: String = ""
 
+    private lazy var closeBtn: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.image =  UIImage(systemName: "xmark.circle")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        imageView.layer.opacity = 0
+        imageView.tintColor = .white
+        imageView.isUserInteractionEnabled = true
+
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeBigAvatar)))
+        return imageView
+    }()
+    
+    private let layerWhite: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.layer.opacity = 0.5
+        view.isHidden = true
+        return view
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -103,11 +131,13 @@ class ProfileHeaderView: UIView {
     }
     
     func subview() {
-        addSubview(imageView)
         addSubview(titleName)
         addSubview(titleStatus)
         addSubview(button)
         addSubview(textField)
+        addSubview(layerWhite)
+        addSubview(imageView)
+        addSubview(closeBtn)
     }
 
     func constrains() {
@@ -132,6 +162,54 @@ class ProfileHeaderView: UIView {
             textField.widthAnchor.constraint(equalToConstant: 210),
             textField.leadingAnchor.constraint(equalTo: titleName.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            
+            
+            layerWhite.leadingAnchor.constraint(equalTo: leadingAnchor),
+            layerWhite.trailingAnchor.constraint(equalTo: trailingAnchor),
+            layerWhite.topAnchor.constraint(equalTo: topAnchor),
+            
+            closeBtn.widthAnchor.constraint(equalToConstant: 30),
+            closeBtn.heightAnchor.constraint(equalToConstant: 30),
+            closeBtn.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            closeBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
         ])
+    }
+    @objc private func openBigAvatar() {
+            
+            let widthScreen = UIScreen.main.bounds.width
+            let heightScreen = widthScreen * 2
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.transform = CGAffineTransform(scaleX: 4, y: 4)
+                self.layerWhite.frame = .init(origin: CGPoint(x: 0, y: 0), size: CGSize(width: widthScreen, height: heightScreen))
+                self.imageView.center = self.layerWhite.center
+                self.imageView.layer.cornerRadius = 0
+                self.layerWhite.isHidden = false
+                  self.layerWhite.layer.opacity = 0.7
+                self.imageView.layer.borderWidth = 0
+            }) { _ in
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.closeBtn.alpha = 1
+                }
+            }
+    }
+    
+    @objc private func closeBigAvatar() {
+
+        UIView.animate(withDuration: 0.3, animations: {
+            self.closeBtn.alpha = 0
+
+        }) { _ in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.layer.borderWidth = 3
+
+                  self.layerWhite.layer.opacity = 0.0
+                self.imageView.frame = .init(origin: CGPoint(x: 16, y: 16), size: CGSize(width: 100, height: 100))
+                self.imageView.transform = .identity
+                self.imageView.layer.cornerRadius = 60
+            })
+        }
     }
 }
